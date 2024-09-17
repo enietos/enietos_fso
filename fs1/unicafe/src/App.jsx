@@ -18,9 +18,7 @@ const App = () => {
       <Button onClick={handleNeutralClick} text="Neutral"/>
       <Button onClick={handleBadClick} text="Bad"/>
       <br></br>
-      <StatisticLine text="Good" value ={good} />
-      <StatisticLine text="Bad" value ={bad} />
-      <StatisticLine text="Neutral" value ={neutral} />
+      
       <Statistics Ratings = {Ratings}></Statistics>
     </div>
   )
@@ -32,14 +30,23 @@ const Statistics = ({ Ratings }) => {
   if (sum === 0) {    
     return (<div> This component will display statistics once there is data</div>)  
     }  
-    return (<div> Mean: {(Ratings[0] - Ratings[2]) / sum}</div>)
+    return (  <table>
+      <tbody>
+      <StatisticLine text="Good" value ={Ratings[0]} />
+              <StatisticLine text="Bad" value ={Ratings[2]} />
+              <StatisticLine text="Neutral" value ={Ratings[1]} />
+              <StatisticLine text="Mean" value = {(Ratings[0] - Ratings[2]) / sum}/>
+              </tbody>
+    </table>
+    )
 }
 
 const StatisticLine = ({text,value}) => {
     return (
-      <div>
-        {text}: {value}
-      </div>
+      <tr>
+      <td>{text}</td>
+      <td>{value}</td>
+    </tr>
     )
 }
 
